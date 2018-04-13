@@ -29,12 +29,12 @@ public class JsonWeatherHandler {
         JSONObject jsonObject = new JSONObject(data);
 
         JSONObject coordinateObject =getObject("coord", jsonObject);
-        weather.getLocationWeather().setLongitude(getFloat("lot", coordinateObject));
+        weather.getLocationWeather().setLongitude(getFloat("lon", coordinateObject));
         weather.getLocationWeather().setLatitude(getFloat("lat", coordinateObject));
 
         JSONObject sysObject = getObject("sys", jsonObject);
         weather.getLocationWeather().setNameCountry(getString("country", sysObject));
-        weather.getLocationWeather().setNameCity(getString("name", sysObject));
+        weather.getLocationWeather().setNameCity(getString("name", jsonObject));
         weather.getLocationWeather().setSunrise(getInt("sunrise", sysObject));
         weather.getLocationWeather().setSunset(getInt("sunset", sysObject));
 
@@ -51,7 +51,7 @@ public class JsonWeatherHandler {
         weather.getCurrentCondition().setPressure(getInt("pressure", jsonMainObject));
         weather.getTemperature().setMaxTemperature(getFloat("temp_max", jsonMainObject));
         weather.getTemperature().setMinTemperature(getFloat("temp_min", jsonMainObject));
-        weather.getTemperature().setTemperature(getFloat("temp", jsonMainObject));
+        weather.getTemperature().setCurrentTemperature(getFloat("temp", jsonMainObject));
 
         JSONObject jsonWindObject = getObject("wind", jsonObject);
 

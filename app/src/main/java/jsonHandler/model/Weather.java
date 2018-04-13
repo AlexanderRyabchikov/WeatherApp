@@ -3,7 +3,7 @@ package jsonHandler.model;
 
 public class Weather {
 
-    class CurrentCondition{
+    public class CurrentCondition{
 
         private int weatherId = 0;
         private String condition = "";
@@ -64,13 +64,13 @@ public class Weather {
 
     }
 
-    class Temperature{
+    public class Temperature{
 
-        public float getTemperature() {
+        public float getCurrentTemperature() {
             return temperature;
         }
 
-        public void setTemperature(float temperature) {
+        public void setCurrentTemperature(float temperature) {
             this.temperature = temperature;
         }
 
@@ -96,7 +96,7 @@ public class Weather {
 
     }
 
-    class Wind{
+    public class Wind{
 
         public float getSpeed() {
             return speed;
@@ -158,7 +158,7 @@ public class Weather {
 
     }*/
 
-    class Clouds{
+    public class Clouds{
 
         public int getPercent() {
             return percent;
