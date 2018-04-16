@@ -3,24 +3,56 @@ package com.example.skender.weatherapp;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
+import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import jsonHandler.model.JsonWeatherHandler;
 import jsonHandler.model.*;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private String[] listDefaultCities = {
+            "Пенза",
+            "Москва",
+            "Нижний Новгород",
+            "Санкт-Петербург"
+    };
+    ArrayList<String> arrayList;
+    SpinnerDialog spinnerDialog;
+    Button showListCities;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.title_action_bar_main);
+        showListCities = findViewById(R.id.spinnerCities);
+        arrayList = new ArrayList<>(Arrays.asList(listDefaultCities));
+        spinnerDialog = new SpinnerDialog(MainActivity.this,
+                arrayList,
+                "Выберите город");
+        spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+            @Override
+            public void onClick(String s, int i) {
+                showListCities.setText(s);
+            }
+        });
 
+        showListCities.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                spinnerDialog.showSpinerDialog();
+            }
+        });
         Weather weather;
 
         TextView currentTemp = findViewById(R.id.currentTemperature);

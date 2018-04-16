@@ -3,4 +3,7 @@
     <string name="defaultTextTemp">Нет\nданных</string>
     <string name="Update">Обновлено: </string>
     <string name="stateSky">На небе: </string>
+    <string name="refreshWeather">refresh</string>
+    <string name="titleActionbar">Погода в</string>
+    <string name="listCitiesDefault">Выбрать город</string>
 </resources>
