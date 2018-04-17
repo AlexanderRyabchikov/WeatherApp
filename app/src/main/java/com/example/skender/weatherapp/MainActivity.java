@@ -1,11 +1,14 @@
 package com.example.skender.weatherapp;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TabHost;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -13,21 +16,25 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import helpers.HTTPClient;
+import helpers.TabWeather;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
-import jsonHandler.model.JsonWeatherHandler;
 import jsonHandler.model.*;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnSpinerItemClick, View.OnClickListener {
 
     private String[] listDefaultCities = {
-            "Пенза",
-            "Москва",
-            "Нижний Новгород",
-            "Санкт-Петербург"
+            "Penza",
+            "Moscow",
+            "Nizhniy Novgorod"
     };
-    ArrayList<String> arrayList;
+    private static final String dialogTitle = "Выберите город...";
+    TextView currentTemp;
+    TextView skyState;
+    ImageView imageView;
     SpinnerDialog spinnerDialog;
+    ArrayList<String> arrayList;
     Button showListCities;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,73 +42,77 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.title_action_bar_main);
+        initMainActivity();
+    }
+
+    private void initMainActivity() {
+        currentTemp = findViewById(R.id.currentTemperature);
+        skyState = findViewById(R.id.stateSkyData);
         showListCities = findViewById(R.id.spinnerCities);
+        imageView = findViewById(R.id.iconWeather);
         arrayList = new ArrayList<>(Arrays.asList(listDefaultCities));
         spinnerDialog = new SpinnerDialog(MainActivity.this,
                 arrayList,
-                "Выберите город");
-        spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
-            @Override
-            public void onClick(String s, int i) {
-                showListCities.setText(s);
-            }
-        });
+                dialogTitle);
 
-        showListCities.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        spinnerDialog.bindOnSpinerListener(this);
+        showListCities.setOnClickListener(this);
+
+        new TabWeather().setup(findViewById(R.id.taHost));
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.spinnerCities:
                 spinnerDialog.showSpinerDialog();
+                break;
+        }
+    }
+
+    @Override
+    public void onClick(String s, int i) {
+        showListCities.setText(s);
+        WeatherAsyncTask weatherAsyncTask = new WeatherAsyncTask();
+        weatherAsyncTask.execute(new String[]{s});
+    }
+
+
+    private class WeatherAsyncTask extends AsyncTask<String, Void, Weather>{
+
+        @Override
+        protected Weather doInBackground(String... strings) {
+            Weather weather = new Weather();
+            String data = (new HTTPClient().getWeatherData(strings[0]));
+            try{
+                weather = JsonWeatherHandler.getWeather(data);
+                weather.setIconData(new HTTPClient().getImage(weather.getCurrentCondition().getIconWeather()));
+            }catch (JSONException e){
+
             }
-        });
-        Weather weather;
-
-        TextView currentTemp = findViewById(R.id.currentTemperature);
-        TextView skyState = findViewById(R.id.stateSkyData);
-        TabHost tabHost = findViewById(R.id.taHost);
-        tabHost.setup();
-
-        TabHost.TabSpec tabSpec;
-
-        tabSpec = tabHost.newTabSpec("tagNow");
-        tabSpec.setIndicator("Сегодня");
-        tabSpec.setContent(R.id.tvTab1);
-        tabHost.addTab(tabSpec);
-
-
-        tabSpec = tabHost.newTabSpec("TheeDayTag");
-        tabSpec.setIndicator("На 3 дня");
-        tabSpec.setContent(R.id.tvTab2);
-        tabHost.addTab(tabSpec);
-
-        tabSpec = tabHost.newTabSpec("FiveDayTag");
-        tabSpec.setIndicator("На 5 дней");
-        tabSpec.setContent(R.id.tvTab3);
-        tabHost.addTab(tabSpec);
-
-        tabHost.setCurrentTabByTag("tagNow");
-
-
-        String jsonResponse = "{\"coord\":{\"lon\":-122.09,\"lat\":37.39},\n" +
-                "\"sys\":{\"type\":3,\"id\":168940,\"message\":0.0297,\"country\":\"US\",\"sunrise\":1427723751,\"sunset\":1427768967},\n" +
-                "\"weather\":[{\"id\":800,\"main\":\"Clear\",\"description\":\"Sky is Clear\",\"icon\":\"01n\"}],\n" +
-                "\"base\":\"stations\",\n" +
-                "\"main\":{\"temp\":25.6,\"humidity\":74,\"pressure\":1016.8,\"temp_min\":284.82,\"temp_max\":286.48},\n" +
-                "\"wind\":{\"speed\":0.96,\"deg\":285.001},\n" +
-                "\"clouds\":{\"all\":0},\n" +
-                "\"dt\":1427700245,\n" +
-                "\"id\":0,\n" +
-                "\"name\":\"Mountain View\",\n" +
-                "\"cod\":200}";
-        try {
-            weather = JsonWeatherHandler.getWeather(jsonResponse);
-            currentTemp.setText(String.valueOf(weather.getTemperature().getCurrentTemperature()) + "\u2103");
-            skyState.setText(weather.getCurrentCondition().getDescripion());
-        } catch (JSONException e) {
-            e.printStackTrace();
+            return weather;
         }
 
+        @Override
+        protected void onPostExecute(Weather weather){
+            /*Скрываем прогрессБар*/
+            if(weather.getIconData() != null && weather.getIconData().length > 0){
+                Bitmap img = BitmapFactory.decodeByteArray(
+                        weather.getIconData(),
+                        0 ,
+                        weather.getIconData().length);
+
+                imageView.setImageBitmap(img);
+            }
 
 
+        }
 
+        @Override
+        protected void onPreExecute(){
+            /*Отображаем прогресс бар*/
+
+        }
     }
 }

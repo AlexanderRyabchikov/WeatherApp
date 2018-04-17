@@ -22,15 +22,15 @@
         android:layout_marginLeft="15dp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/action_bar_title"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/refresh"
         android:background="@null"
         android:text="@string/listCitiesDefault"
         android:layout_toEndOf="@+id/action_bar_title"
-        android:layout_marginStart="15dp" />
+        android:layout_marginStart="15dp"
+        android:layout_toStartOf="@+id/refresh" />
 
     <ImageButton
-        android:id="@+id/runMap"
+        android:id="@+id/refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

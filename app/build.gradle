@@ -28,5 +28,5 @@ dependencies {
 
     // library live search in spinner
 
-    compile 'com.github.MdFarhanRaja:SearchableSpinner:1.9'
+    implementation 'com.github.MdFarhanRaja:SearchableSpinner:1.9'
 }

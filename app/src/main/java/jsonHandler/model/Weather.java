@@ -8,6 +8,10 @@ public class Weather {
         private int weatherId = 0;
         private String condition = "";
         private String descripion = "";
+        private String iconWeather = "";
+
+        private float pressure = 0.0f;
+        private float humidity = 0.0f;
 
         public int getWeatherId() {
             return weatherId;
@@ -56,11 +60,6 @@ public class Weather {
         public void setHumidity(float humidity) {
             this.humidity = humidity;
         }
-
-        private String iconWeather = "";
-
-        private float pressure = 0.0f;
-        private float humidity = 0.0f;
 
     }
 
@@ -119,7 +118,7 @@ public class Weather {
 
     }
 
-    /*class Rain{
+    class Rain{
 
         public String getTime() {
             return time;
@@ -156,7 +155,7 @@ public class Weather {
 
         private float ammount = 0.0f;
 
-    }*/
+    }
 
     public class Clouds{
 
@@ -178,8 +177,8 @@ public class Weather {
         currentCondition = new CurrentCondition();
         temperature = new Temperature();
         wind = new Wind();
-        /*rain = new Rain();
-        snow = new Snow();*/
+        rain = new Rain();
+        snow = new Snow();
         clouds = new Clouds();
     }
 
@@ -215,7 +214,7 @@ public class Weather {
         this.wind = wind;
     }
 
-    /*public Rain getRain() {
+    public Rain getRain() {
         return rain;
     }
 
@@ -229,7 +228,7 @@ public class Weather {
 
     public void setSnow(Snow snow) {
         this.snow = snow;
-    }*/
+    }
 
     public Clouds getClouds() {
         return clouds;
@@ -239,13 +238,22 @@ public class Weather {
         this.clouds = clouds;
     }
 
+    public byte[] getIconData() {
+        return iconData;
+    }
+
+    public void setIconData(byte[] iconData) {
+        this.iconData = iconData;
+    }
+
     private LocationWeather locationWeather;
     private CurrentCondition currentCondition;
     private Temperature temperature;
     private Wind wind;
-    /*private Rain rain;
-    private Snow snow;*/
+    private Rain rain;
+    private Snow snow;
     private Clouds clouds;
+    private byte[] iconData;
 
 
 }
