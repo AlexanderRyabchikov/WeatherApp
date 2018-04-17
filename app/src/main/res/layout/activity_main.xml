@@ -1,124 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.skender.weatherapp.MainActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:background="@drawable/back_ground_gradient">
 
-        <LinearLayout
-            android:id="@+id/layoutHead"
-            android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/relativeHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/AddCity"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/iconWeather"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_launcher_background"
-                android:layout_marginStart="20dp" />
-            <TextView
-                android:id="@+id/currentTemperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="25dp"
-                android:textSize="30sp"
-                android:text="@string/defaultTextTemp"
-                android:layout_marginStart="10dp" />
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/add"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:layout_alignParentStart="true" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Penza"
+            android:background="@null"
+            android:textAllCaps="false"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="25sp"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_action_refresh"
+            android:background="@null"
+            android:id="@+id/refresh"
+            android:layout_margin="10dp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/linearDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/textDate" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical">
+        <TextView
+            android:id="@+id/main_temperature"
+            android:layout_width="wrap_content"
+            android:text="25 C"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:textSize="70sp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/state_sky"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_temperature"
+            android:layout_centerHorizontal="true"
+            android:text="sky is ckean" />
+
+        <ImageView
+            android:id="@+id/viewIcon"
+            android:src="@drawable/icon_44"
+            android:layout_below="@+id/state_sky"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical"
-                android:layout_marginStart="20dp">
-                <LinearLayout
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp">
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Update"
-                        android:textSize="12sp" />
-                    <TextView
-                        android:id="@+id/dateUpdate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="never"
-                        android:textSize="12sp"/>
-
-                    <TextView
-                        android:layout_marginTop="6dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/stateSky"
-                        android:textSize="12sp" />
-                    <TextView
-                        android:id="@+id/stateSkyData"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="never"
-                        android:textSize="12sp"/>
-
-                </LinearLayout>
-
+                    android:textSize="20sp"
+                    android:id="@+id/labelHumidity"
+                    android:text="Влажность"/>
+                <TextView
+                    android:id="@+id/textHumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    />
             </LinearLayout>
 
-        </LinearLayout>
+            <ImageButton
+                android:id="@+id/myLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/location"
+                android:layout_margin="10dp"
+                android:background="@null" />
 
-    <TabHost
-        android:id="@+id/taHost"
-        android:layout_below="@id/layoutHead"
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content">
-        <LinearLayout
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:id="@+id/labelWind"
+                    android:text="Ветер"/>
+                <TextView
+                    android:id="@+id/textWind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </TabWidget>
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/tvTab1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:text="Пока не поддерживается">
-                </TextView>
-                <TextView
-                    android:id="@+id/tvTab2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:text="Пока не поддерживается">
-                </TextView>
-                <TextView
-                    android:id="@+id/tvTab3"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_height="wrap_content"
-                    android:text="Пока не поддерживается">
-                </TextView>
-            </FrameLayout>
-        </LinearLayout>
-    </TabHost>
-    </RelativeLayout>
+            android:layout_height="4dp"
+            android:background="@drawable/separator"
+            android:layout_marginTop="10dp"
+            android:id="@+id/view" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

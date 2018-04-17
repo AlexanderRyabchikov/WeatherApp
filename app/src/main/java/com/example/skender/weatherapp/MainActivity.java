@@ -22,7 +22,7 @@ import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import jsonHandler.model.*;
 
-public class MainActivity extends AppCompatActivity implements OnSpinerItemClick, View.OnClickListener {
+public class MainActivity extends AppCompatActivity /*implements OnSpinerItemClick, View.OnClickListener*/ {
 
     private String[] listDefaultCities = {
             "Penza",
@@ -40,11 +40,11 @@ public class MainActivity extends AppCompatActivity implements OnSpinerItemClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        /*getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.title_action_bar_main);
-        initMainActivity();
+        initMainActivity();*/
     }
-
+/*
     private void initMainActivity() {
         currentTemp = findViewById(R.id.currentTemperature);
         skyState = findViewById(R.id.stateSkyData);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements OnSpinerItemClick
         @Override
         protected void onPostExecute(Weather weather){
             /*Скрываем прогрессБар*/
-            if(weather.getIconData() != null && weather.getIconData().length > 0){
+            /*if(weather.getIconData() != null && weather.getIconData().length > 0){
                 Bitmap img = BitmapFactory.decodeByteArray(
                         weather.getIconData(),
                         0 ,
@@ -108,11 +108,11 @@ public class MainActivity extends AppCompatActivity implements OnSpinerItemClick
 
 
         }
-
-        @Override
-        protected void onPreExecute(){
+            */
+        /*@Override
+        protected void onPreExecute(){*/
             /*Отображаем прогресс бар*/
 
-        }
-    }
+        /*}
+    }*/
 }

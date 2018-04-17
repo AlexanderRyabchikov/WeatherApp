@@ -8,7 +8,7 @@ import com.example.skender.weatherapp.R;
 public class TabWeather {
 
     public void setup(View view){
-        TabHost tabHost = (TabHost) view;
+       /* TabHost tabHost = (TabHost) view;
         tabHost.setup();
 
         TabHost.TabSpec tabSpec;
@@ -30,5 +30,5 @@ public class TabWeather {
         tabHost.addTab(tabSpec);
 
         tabHost.setCurrentTabByTag("tagNow");
-    }
+    */}
 }
