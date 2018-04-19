@@ -26,11 +26,12 @@
             android:background="@null"
             android:layout_alignParentStart="true" />
         <Button
+            android:id="@+id/SelectCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="Penza"
+            android:text="@string/defaultCity"
             android:background="@null"
             android:textAllCaps="false"
             android:textColor="@color/textColorPrimary"
@@ -66,7 +67,7 @@
         <TextView
             android:id="@+id/main_temperature"
             android:layout_width="wrap_content"
-            android:text="25 C"
+            android:text="@string/defaultTextContent"
             android:gravity="center_vertical|center_horizontal"
             android:layout_centerHorizontal="true"
             android:textSize="70sp"
@@ -79,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/main_temperature"
             android:layout_centerHorizontal="true"
-            android:text="sky is clean" />
+            android:text="@string/defaultTextContent" />
 
         <ImageView
             android:id="@+id/viewIcon"
@@ -106,13 +107,13 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:id="@+id/labelHumidity"
-                    android:text="Влажность"/>
+                    android:text="@string/humadaty"/>
                 <TextView
                     android:id="@+id/textHumidity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="56%"
+                    android:text="@string/defaultTextContent"
                     android:layout_gravity="center_horizontal|center_vertical"
                     />
             </LinearLayout>
@@ -140,13 +141,13 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:id="@+id/labelWind"
-                    android:text="Ветер"/>
+                    android:text="@string/wind"/>
                 <TextView
                     android:id="@+id/textWind"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="25 м/с"
+                    android:text="@string/defaultTextContent"
                     android:layout_gravity="center_horizontal|center_vertical"
                     />
             </LinearLayout>
@@ -159,7 +160,6 @@
             android:layout_marginTop="10dp"
             android:id="@+id/view" />
         <LinearLayout
-            android:layout_below="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -172,7 +172,7 @@
                 android:id="@+id/dayWeek1"
                 android:layout_width="match_parent"
                 android:textAlignment="center"
-                android:text="Пнд"
+                android:text="@string/defaultTextContent"
                 android:textSize="15sp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_height="wrap_content" />
@@ -182,13 +182,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="25,4 C"
+                    android:text="@string/defaultTextContent"
                     android:textSize="20sp"
                     android:layout_gravity="center_horizontal|center_vertical"
                     />
                 <ImageView
                     android:id="@+id/iconDay1"
-                    android:src="@drawable/icon_01d"
+                    android:src="@drawable/icon_44"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -201,7 +201,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/dayWeek2"
-                    android:text="Втр"
+                    android:text="@string/defaultTextContent"
                     android:textSize="15sp"
                     android:layout_width="match_parent"
                     android:textAlignment="center"
@@ -213,13 +213,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="25,4 C"
+                    android:text="@string/defaultTextContent"
                     android:textSize="20sp"
                     android:layout_gravity="center_horizontal|center_vertical"
                     />
                 <ImageView
                     android:id="@+id/iconDay2"
-                    android:src="@drawable/icon_01d"
+                    android:src="@drawable/icon_44"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -231,7 +231,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/dayWeek3"
-                    android:text="Срд"
+                    android:text="@string/defaultTextContent"
                     android:textSize="15sp"
                     android:layout_width="match_parent"
                     android:textAlignment="center"
@@ -243,13 +243,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="25,4 C"
+                    android:text="@string/defaultTextContent"
                     android:textSize="20sp"
                     android:layout_gravity="center_horizontal|center_vertical"
                     />
                 <ImageView
                     android:id="@+id/iconDay3"
-                    android:src="@drawable/icon_01d"
+                    android:src="@drawable/icon_44"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -273,13 +273,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="25,4 C"
+                    android:text="@string/defaultTextContent"
                     android:textSize="20sp"
                     android:layout_gravity="center_horizontal|center_vertical"
                     />
                 <ImageView
                     android:id="@+id/iconDay4"
-                    android:src="@drawable/icon_01d"
+                    android:src="@drawable/icon_44"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -291,7 +291,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/dayWeek5"
-                    android:text="Птн"
+                    android:text="@string/defaultTextContent"
                     android:textSize="15sp"
                     android:layout_width="match_parent"
                     android:textAlignment="center"
@@ -303,13 +303,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="25,4 C"
+                    android:text="@string/defaultTextContent"
                     android:textSize="20sp"
                     android:layout_gravity="center_horizontal|center_vertical"
                     />
                 <ImageView
                     android:id="@+id/iconDay5"
-                    android:src="@drawable/icon_01d"
+                    android:src="@drawable/icon_44"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

@@ -6,4 +6,9 @@
     <string name="refreshWeather">refresh</string>
     <string name="titleActionbar">Погода в</string>
     <string name="listCitiesDefault">Выбрать город</string>
+    <string name="defaultCity">Выберите город...</string>
+    <string name="defaultTextContent">N/A</string>
+    <string name="humadaty">Влажность</string>
+    <string name="wind">Ветер</string>
+    <string name="hint_text">Введите город...</string>
 </resources>

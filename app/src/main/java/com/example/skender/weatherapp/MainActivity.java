@@ -16,13 +16,14 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import helpers.DialogAddCity;
 import helpers.HTTPClient;
 import helpers.TabWeather;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import jsonHandler.model.*;
 
-public class MainActivity extends AppCompatActivity /*implements OnSpinerItemClick, View.OnClickListener*/ {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private String[] listDefaultCities = {
             "Penza",
@@ -43,6 +44,22 @@ public class MainActivity extends AppCompatActivity /*implements OnSpinerItemCli
         /*getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.title_action_bar_main);
         initMainActivity();*/
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.AddCity:
+                new DialogAddCity(getApplicationContext(),
+                        "Добавте город",
+                        "Сохранить",
+                "Отмена"/*Добавить ссылку на базу*/).createDialog();
+                break;
+            case R.id.SelectCity:
+                break;
+            default:
+                break;
+        }
     }
 /*
     private void initMainActivity() {
