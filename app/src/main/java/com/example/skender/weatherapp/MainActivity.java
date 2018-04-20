@@ -1,5 +1,6 @@
 package com.example.skender.weatherapp;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +18,9 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import helpers.Constants;
 import helpers.DialogAddCity;
 import helpers.HTTPClient;
-import helpers.TabWeather;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import jsonHandler.model.*;
@@ -41,19 +43,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.title_action_bar_main);
-        initMainActivity();*/
+        initMainActivity();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.AddCity:
-                new DialogAddCity(getApplicationContext(),
-                        "Добавте город",
-                        "Сохранить",
-                "Отмена"/*Добавить ссылку на базу*/).createDialog();
+                new DialogAddCity(this,
+                        Constants.ADD_CITY_TITLE,
+                        Constants.NAME_POSITIVE_BUTTON,
+                Constants.NAME_NEGATIVE_BUTTON/*Добавить ссылку на базу*/).createDialog();
                 break;
             case R.id.SelectCity:
                 break;
@@ -61,24 +61,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-/*
+
     private void initMainActivity() {
-        currentTemp = findViewById(R.id.currentTemperature);
-        skyState = findViewById(R.id.stateSkyData);
-        showListCities = findViewById(R.id.spinnerCities);
-        imageView = findViewById(R.id.iconWeather);
-        arrayList = new ArrayList<>(Arrays.asList(listDefaultCities));
+        /*arrayList = new ArrayList<>(Arrays.asList(listDefaultCities));
         spinnerDialog = new SpinnerDialog(MainActivity.this,
                 arrayList,
-                dialogTitle);
-
-        spinnerDialog.bindOnSpinerListener(this);
-        showListCities.setOnClickListener(this);
-
-        new TabWeather().setup(findViewById(R.id.taHost));
+                dialogTitle);*/
+        findViewById(R.id.AddCity).setOnClickListener(this);
 
     }
-
+/*
     @Override
     public void onClick(View view) {
         switch (view.getId()){

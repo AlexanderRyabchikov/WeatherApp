@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:id="@+id/labelHumidity"
-                    android:text="@string/humadaty"/>
+                    android:text="@string/humidity"/>
                 <TextView
                     android:id="@+id/textHumidity"
                     android:layout_width="wrap_content"

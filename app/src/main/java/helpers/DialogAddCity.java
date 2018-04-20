@@ -41,7 +41,7 @@ public class DialogAddCity {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
         alertBuilder.setTitle(Title);
 
-        //alertBuilder.setIcon();
+        alertBuilder.setIcon(R.drawable.android_weather);
         alertBuilder.setView(dialogView);
         final EditText nameCity = dialogView.findViewById(R.id.et_input);
         alertBuilder
