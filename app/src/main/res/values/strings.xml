@@ -11,4 +11,6 @@
     <string name="humidity">Влажность</string>
     <string name="wind">Ветер</string>
     <string name="hint_text">Введите город...</string>
+    <string name="min_temperature_label">Мин.\n темп.</string>
+    <string name="max_temperature_label">Макс.\n темп.</string>
 </resources>
