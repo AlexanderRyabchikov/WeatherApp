@@ -11,7 +11,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import Interfaces.Api;
 import helpers.DialogAddCity;
@@ -54,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Api weatherApi;
 
+    private static final String[] strDays = new String[] { "Пнд", "Втр", "Срд", "Чтв", "Птн",
+            "Сбт", "Вск" };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.refresh:
                 getCurrentWeather("Penza,RU");
+                getForecastWeather("Penza,RU");
                 break;
             case R.id.myLocation:
                 break;
@@ -250,7 +256,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         call.enqueue(new Callback<WeatherForecast>() {
             @Override
             public void onResponse(Call call, Response response) {
+                WeatherForecast data = (WeatherForecast) response.body();
+                if(response.isSuccessful()){
+                    SimpleDateFormat formatDayOfWeek = new SimpleDateFormat("E");
+                    String dateFirstDay = formatDayOfWeek.format(data.getItems().get(2).getDate().getTime());
+                    dayFisrtForecastTextView.setText(dateFirstDay);
+                    temperatureFisrtForecastTextView.setText(data.getItems().get(2).getMainWeather().getTemperature());
+                    stateSkyFisrtForecastImageView.setImageDrawable(
+                            getIcon(data
+                                    .getItems()
+                                    .get(2)
+                                    .getCurrentCondition()
+                                    .get(0)
+                                    .getIconWeather()));
 
+
+                    String dateSecondDay = formatDayOfWeek.format(data.getItems().get(10).getDate().getTime());
+                    daySecondForecastTextView.setText(dateSecondDay);
+                    temperatureSecondForecastTextView.setText(data.getItems().get(10).getMainWeather().getTemperature());
+                    stateSkySecondForecastImageView.setImageDrawable(
+                            getIcon(data
+                                    .getItems()
+                                    .get(10)
+                                    .getCurrentCondition()
+                                    .get(0)
+                                    .getIconWeather()));
+
+
+                    String dateThirdDay = formatDayOfWeek.format(data.getItems().get(18).getDate().getTime());
+                    dayThirdForecastTextView.setText(dateThirdDay);
+                    temperatureThirdForecastTextView.setText(data.getItems().get(18).getMainWeather().getTemperature());
+                    stateSkyThirdForecastImageView.setImageDrawable(
+                            getIcon(data
+                                    .getItems()
+                                    .get(18)
+                                    .getCurrentCondition()
+                                    .get(0)
+                                    .getIconWeather()));
+
+
+                    String dateFourthDay = formatDayOfWeek.format(data.getItems().get(26).getDate().getTime());
+                    dayFourthForecastTextView.setText(dateFourthDay);
+                    temperatureFourthForecastTextView.setText(data.getItems().get(26).getMainWeather().getTemperature());
+                    stateSkyFourthForecastImageView.setImageDrawable(
+                            getIcon(data
+                                    .getItems()
+                                    .get(26)
+                                    .getCurrentCondition()
+                                    .get(0)
+                                    .getIconWeather()));
+
+
+                    String dateFivthDay = formatDayOfWeek.format(data.getItems().get(34).getDate().getTime());
+                    dayFivthForecastTextView.setText(dateFivthDay);
+                    temperatureFivthForecastTextView.setText(data.getItems().get(34).getMainWeather().getTemperature());
+                    stateSkyFivthForecastImageView.setImageDrawable(
+                            getIcon(data
+                                    .getItems()
+                                    .get(34)
+                                    .getCurrentCondition()
+                                    .get(0)
+                                    .getIconWeather()));
+                }
             }
 
             @Override
