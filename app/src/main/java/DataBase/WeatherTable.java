@@ -25,7 +25,7 @@ public class WeatherTable {
     public String _skyDescription;
     public String _iconId;
     public double _humidity;
-    private double _wind;
+    public double _wind;
 
     /* Five days' weather */
 
