@@ -1,7 +1,7 @@
 package Interfaces;
 import java.util.List;
-import DataBase.BuilderDB;
-import DataBase.WeatherTable;
+import database.BuilderDB;
+import database.WeatherTable;
 
 /**
  * Created by skender on 04.05.18.

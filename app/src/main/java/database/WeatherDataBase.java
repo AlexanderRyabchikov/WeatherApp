@@ -1,4 +1,4 @@
-package DataBase;
+package database;
 
 
 import android.arch.persistence.room.Database;

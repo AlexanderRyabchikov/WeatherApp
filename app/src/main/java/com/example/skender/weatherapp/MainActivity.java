@@ -2,6 +2,7 @@ package com.example.skender.weatherapp;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,12 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
 
+import database.DataBase;
 import Interfaces.Api;
+import Interfaces.IDataBaseApi;
 import helpers.DialogAddCity;
 import helpers.WeatherApi;
+import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import jsonHandler.model.CurrentWeather;
 import jsonHandler.model.WeatherForecast;
 import retrofit2.Call;
@@ -53,35 +57,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView stateSkyThirdForecastImageView;
     ImageView stateSkyFourthForecastImageView;
     ImageView stateSkyFivthForecastImageView;
-
+    IDataBaseApi dataBase;
+    ArrayList<String> arrayList;
+    SpinnerDialog spinnerDialog;
     Api weatherApi;
-
-    private static final String[] strDays = new String[] { "Пнд", "Втр", "Срд", "Чтв", "Птн",
-            "Сбт", "Вск" };
+    public static final String TITLE_SPINNER = "Выберите город";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initMainActivity();
+        dataBase = new DataBase();
+        dataBase.open_connection();
+        arrayList = new ArrayList<>(dataBase.getAllCities());
+        spinnerDialog = new SpinnerDialog(MainActivity.this, arrayList, TITLE_SPINNER);
+        spinnerDialog.bindOnSpinerListener((s, i) -> {
+            selectCityButton.setText(s);
+            if(s.equals("Сочи")){
+                s = "Sochi";
+            }
+            getCurrentWeather(s);
+            getForecastWeather(s);
+        });
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        dataBase.close_connection();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        dataBase.close_connection();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.AddCity:
-                new DialogAddCity(this,
+                DialogAddCity dialog = new DialogAddCity(this,
                         DialogAddCity.ADD_CITY_TITLE,
                         DialogAddCity.NAME_POSITIVE_BUTTON,
-                        DialogAddCity.NAME_NEGATIVE_BUTTON/*Добавить ссылку на базу*/).createDialog();
+                        DialogAddCity.NAME_NEGATIVE_BUTTON, dataBase, MainActivity.this);
+                dialog.createDialog();
                 break;
             case R.id.SelectCity:
+                spinnerDialog.showSpinerDialog();
                 break;
             case R.id.refresh:
-                getCurrentWeather("Penza,RU");
-                getForecastWeather("Penza,RU");
+                String nameCity = selectCityButton.getText().toString();
+                if (nameCity.equals(TITLE_SPINNER)) {
+                    if(nameCity.equals("Сочи")){
+                        nameCity = "Sochi";
+                    }
+                    getCurrentWeather(nameCity);
+                    getForecastWeather(nameCity);
+                }
                 break;
             case R.id.myLocation:
+                
                 break;
             default:
                 break;
@@ -124,6 +161,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         stateSkyFivthForecastImageView = findViewById(R.id.iconDay5);
 
         weatherApi = WeatherApi.getClient().create(Api.class);
+
+
     }
 
     public void getCurrentWeather(String nameCity){

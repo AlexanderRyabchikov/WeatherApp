@@ -8,7 +8,7 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import DataBase.WeatherTable;
+import database.WeatherTable;
 
 /**
  * Created by skender on 04.05.18.
