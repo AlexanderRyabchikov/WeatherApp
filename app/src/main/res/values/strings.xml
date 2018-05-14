@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Погода</string>
+    <string name="defaultTextTemp">Нет\nданных</string>
+    <string name="Update">Обновлено: </string>
+    <string name="stateSky">На небе: </string>
+    <string name="refreshWeather">refresh</string>
+    <string name="titleActionbar">Погода</string>
+    <string name="listCitiesDefault">Выбрать город</string>
+    <string name="defaultCity">Выберите город...</string>
+    <string name="defaultTextContent">N/A</string>
+    <string name="humidity">Влажность</string>
+    <string name="wind">Ветер</string>
+    <string name="hint_text">Введите город...</string>
+    <string name="min_temperature_label">Мин.\n темп.</string>
+    <string name="max_temperature_label">Макс.\n темп.</string>
 </resources>
